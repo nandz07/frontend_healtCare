@@ -5,7 +5,13 @@ import Routers from '../routes/Routers'
 
 function Layouts() {
   return (
-    <div>Layouts</div>
+    <>
+    <Header />
+    <main>
+      <Routers />
+    </main>
+    <Footer />
+    </>
   )
 }
 
