@@ -42,11 +42,11 @@ function Login() {
               Login
             </button>
 
-            <p className="mt-5 text-center text-textColor">
-              Don&apos;t hvae an account? <Link to='/register' className='text-primaryColor
-              font-medium ml-1'>Register</Link>
-            </p>
           </div>
+          <p className="mt-5 text-center text-textColor">
+            Don&apos;t hvae an account? <Link to='/register' className='text-primaryColor
+              font-medium ml-1'>Register</Link>
+          </p>
         </form>
       </div>
     </section>
