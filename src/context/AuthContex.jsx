@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
 
 const initailState = {
-    user: null,
-    role: null,
-    token: null
+    user: localStorage.getItem('user') !== undefined ? JSON.parse(localStorage.getItem('user')):null,
+    role: localStorage.getItem('role') || null,
+    token:  localStorage.getItem('token') || null
 }
 
 export const authContext = createContext(initailState);
@@ -33,10 +33,16 @@ const authReducer = (state, action) => {
     }
 }
 
-export const AuthContextProvider=({children})=>{
-    const [state,dispatch]=useReducer(authReducer,initailState)
+export const AuthContextProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(authReducer, initailState)
 
-    return <authContext.Provider value={{user:state.user,token:state.token,role:state.role,dispatch}}>
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(state.user))
+        localStorage.setItem('token', state.token)
+        localStorage.setItem('role', state.role)
+    }, [state])
+
+    return <authContext.Provider value={{ user: state.user, token: state.token, role: state.role, dispatch }}>
         {children}
     </authContext.Provider>
 }
