@@ -3,7 +3,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../config'
 import { toast } from 'react-toastify'
 import {authContext} from '../context/AuthContex'
-import HashLoader  from 'react-spinners'
+import {HashLoader}  from 'react-spinners'
 
 function Login() {
 
@@ -42,7 +42,8 @@ function Login() {
         type:'LOGIN_SUCCESS',
         payload:{
           user: result.data,
-          token:result.token
+          token:result.token,
+          role:result.role
         }
       })
 
