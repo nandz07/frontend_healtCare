@@ -7,8 +7,6 @@ function ProtectedRoute({ children, allowedRoles }) {
     const { token, role } = useContext(authContext)
 
     const isAllowed = allowedRoles.includes(role)
-    console.log(role)
-    console.log(token)
     const accessibleRoute =token && isAllowed ? children : <Navigate to='/login' replace={true} />
   return accessibleRoute;
 }
