@@ -88,8 +88,8 @@ function Profile({ doctorData,setTab }) {
         const { name, value } = event.target
 
         setFromData(prevFormData => {
-            console.log(prevFormData)
-            console.log(key)
+            // console.log(prevFormData)
+            // console.log(key)
             const updateItems = [...prevFormData[key]]
             updateItems[index][name] = value
 
