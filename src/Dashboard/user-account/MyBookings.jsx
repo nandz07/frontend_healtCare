@@ -7,11 +7,13 @@ import DoctorCard from '../../components/Doctors/DoctorCard'
 
 function MyBookings() {
   const { data: appointments, loading, error } = useFetchData(`${BASE_URL}/users/appointments/my-appointments`)
+  console.log(appointments)
   return (
     <div>
       {loading && <Loading />}
       {error && !loading && <Error errMessage={error} />}
-      {!loading && !error && (<div>
+      {!loading && !error && (<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px]
+    lg:mt-[55px]'>
         {appointments.map(doctor => (
           <DoctorCard doctor={doctor} key={doctor._id} />
         ))}

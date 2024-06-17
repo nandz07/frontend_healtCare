@@ -1,7 +1,34 @@
 import React from 'react'
 import convertTime from '../../utils/convertTime'
+import { BASE_URL, token } from './../../config'
+import { toast } from 'react-toastify'
 
 function Sidepanel({ doctorId, ticketPrice, timeSlots }) {
+
+    const bookingHandler = async () => {
+
+        try {
+            const res = await fetch(`${BASE_URL}/bookings/checkout-session/${doctorId}`, {
+                method: 'post',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            const data = await res.json()
+            if (!res.ok) {
+                throw new Error(data.message+'Please try again')
+            }
+
+            if(data.session.url){
+                window.location.href=data.session.url
+            }
+
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        }
+    }
+
     return (
         <div className='shadow-panelShadow p-3 lg:p-5 rounded-md'>
             <div className="flex items-center justify-between">
@@ -18,7 +45,7 @@ function Sidepanel({ doctorId, ticketPrice, timeSlots }) {
                     {timeSlots?.map((item, index) => (
                         <li key={index} className="flex items-center justify-between mb-2">
                             <p className="text-[15px] leading-6 text-textColor font-semibold">
-                                {item.day.charAt(0).toUpperCase()+item.day.slice(1)}
+                                {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
                             </p>
                             <p className='text-[15px] leading-6 text-textColor font-semibold'>
                                 {/* {item.startingTime} - {item.endingTime} */}
@@ -31,7 +58,7 @@ function Sidepanel({ doctorId, ticketPrice, timeSlots }) {
                 </ul>
             </div>
 
-            <button className='btn px-2 w-full rounded-md'>Book Appointment</button>
+            <button onClick={bookingHandler} className='btn px-2 w-full rounded-md'>Book Appointment</button>
         </div>
     )
 }
