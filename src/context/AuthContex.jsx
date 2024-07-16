@@ -17,7 +17,11 @@ const authReducer = (state, action) => {
                 token: null
             };
         case 'LOGIN_SUCCESS':
-            return {
+            // localStorage.setItem('token',action.payload.token)
+            console.log('action')
+            console.log(action)
+            console.log('action')
+            return {...state,
                 user: action.payload.user,
                 token: action.payload.token,
                 role: action.payload.role,
@@ -40,7 +44,8 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.setItem('user', JSON.stringify(state.user))
         localStorage.setItem('token', state.token)
         localStorage.setItem('role', state.role)
-    }, [state])
+        // dispatch()
+    }, [state.user, state.token, state.role])
 
     return <authContext.Provider value={{ user: state.user, token: state.token, role: state.role, dispatch }}>
         {children}

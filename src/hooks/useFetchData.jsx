@@ -8,6 +8,7 @@ function useFetchData(url) {
     const [error, setError] = useState(null)
 
     useEffect(() => {
+        console.log(token)
         const fetchData = async () => {
             setLoading(true)
             try {
