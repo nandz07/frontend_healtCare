@@ -3,6 +3,8 @@ import logo from '../../assets/images/logo.png'
 import { Link, NavLink } from 'react-router-dom'
 import { BiMenu } from "react-icons/bi"
 import { authContext } from '../../context/AuthContex'
+import { Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
+
 
 const navLinks = [
   {
@@ -29,6 +31,7 @@ function Header() {
   const headerRef = useRef(null)
   const menuRef = useRef(null)
   const { user, role, token } = useContext(authContext)
+  const { dispatch } = useContext(authContext)
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', () => {
@@ -46,6 +49,13 @@ function Header() {
   })
 
   const toggleMenu = () => menuRef.current.classList.toggle('show__menu')
+
+  const handleLogout = () => {
+    console.log('first')
+    dispatch({ type: "LOGOUT" });
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+}
 
   return (
     <header className='header flex items-center' ref={headerRef}>
@@ -79,21 +89,47 @@ function Header() {
             {
               token && user ?
                 (<div >
-                  <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`}>
+                  {/* <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`}> */}
+                  <Menu as='div' className='border-none' >
+                  <MenuButton>
                     {user.photo ? (<>
                       <figure className='w-[35px] h-[35px] rounded-full'>
                         <img src={user?.photo} alt="" />
                       </figure>
 
-                      
+
                     </>
 
                     ) : (
                       <h2>{user?.name}</h2>
                     )}
 
+                  </MenuButton>
+                  <MenuItems
+                    anchor="bottom"
+                    transition
+                    className=" origin-top-right  flex flex-col transition
+                         duration-200 ease-out border-none 
+                         data-[closed]:scale-95 data-[closed]:opacity-0 backdrop-blur-xl
+                          bg-white/30 p-1 right-0 w-48 z-10 mt-11  shadow-md ring-1 ring-opacity-5 focus:outline-none"
+                  >
+                    <MenuItem className='block rounded-lg py-2 px-3 transition hover:bg-blue-500 
+                         hover:text-white text-black hover:no-underline text-center'>
+                      <Link to={`${role === 'doctor' ? '/doctors/profile/me' : '/users/profile/me'}`}>
+                        Your profile
+                      </Link>
 
-                  </Link>
+                    </MenuItem>
+
+                    <MenuItem className='block rounded-lg py-2 px-3 transition hover:bg-red-500
+                         hover:text-white text-black hover:no-underline'>
+                      <button onClick={handleLogout}>
+                        Logout
+                      </button>
+                    </MenuItem>
+                  </MenuItems>
+                  </Menu>
+                  {/* </Link> */}
                 </div>
                 )
                 :
