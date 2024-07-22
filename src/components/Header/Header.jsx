@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import logo from '../../assets/images/logo.png'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { BiMenu } from "react-icons/bi"
 import { authContext } from '../../context/AuthContex'
 import { Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
@@ -32,6 +32,7 @@ function Header() {
   const menuRef = useRef(null)
   const { user, role, token } = useContext(authContext)
   const { dispatch } = useContext(authContext)
+  const navigate=useNavigate()
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', () => {
@@ -51,10 +52,10 @@ function Header() {
   const toggleMenu = () => menuRef.current.classList.toggle('show__menu')
 
   const handleLogout = () => {
-    console.log('first')
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem('token');
-    window.location.href = '/login';
+    navigate('/login')
+    // window.location.href = '/login';
 }
 
   return (

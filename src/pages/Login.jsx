@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../config'
 import { toast } from 'react-toastify'
@@ -58,6 +58,13 @@ function Login() {
       setLoading(false)
     }
   }
+  let user=JSON.parse(localStorage.getItem('user'))
+  useEffect(()=>{
+    if(user!=null){
+      navigate('/home')
+    }
+  },[user])
+
   return (
     <section className='px-5 lg:px-0'>
       <div className='w-full max-w-[570px] mx-auto rounded-lg shadow-md md:p-10'>

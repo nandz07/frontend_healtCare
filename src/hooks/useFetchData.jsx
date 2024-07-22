@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { token } from '../config'
+// import { token } from '../config'
 import { toast } from 'react-toastify';
 
 function useFetchData(url) {
@@ -8,7 +8,7 @@ function useFetchData(url) {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        console.log(token)
+        let token = localStorage.getItem('token');
         const fetchData = async () => {
             setLoading(true)
             try {

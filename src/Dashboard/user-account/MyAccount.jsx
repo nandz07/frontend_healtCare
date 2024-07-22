@@ -20,7 +20,7 @@ function MyAccount() {
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
         localStorage.removeItem('token');
-        window.location.href = '/login';
+        // window.location.href = '/login';
     }
     return (
         <section>
