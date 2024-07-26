@@ -5,15 +5,22 @@ import Routers from '../routes/Routers'
 import { useLocation } from 'react-router-dom';
 import AdminHeaders from '../components/Admin/Shared/AdminHeaders';
 import AdminSidebar from '../components/Admin/Shared/AdminSidebar';
+import AdminLogin from '../pages/Admin/AdminLogin';
 
 function Layouts() {
   const path = useLocation();
   let dPath = path.pathname.split('/')[1]
+  let dSubPath=path.pathname.split('/')[2]
   return (
     <>
       {
         dPath === 'admin' ? (
-          <>
+          dSubPath==='adminLogin'?(
+            <>
+            <AdminLogin />
+            </>
+          ):(
+            <>
             <div className='flex flex-row bg-neutral-100 h-screen w-screen overflow-hidden'>
               {/* <div className='bg-sky-200'>Header</div> */}
               <AdminSidebar />
@@ -24,6 +31,8 @@ function Layouts() {
               {/* <div>Footer</div> */}
             </div>
           </>
+          )
+          
         ) :
           (
             <>
