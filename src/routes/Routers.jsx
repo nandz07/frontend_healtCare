@@ -11,6 +11,8 @@ import MyAccount from '../Dashboard/user-account/MyAccount';
 import Dashboard from '../Dashboard/doctor-account/Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import CheckoutSuccess from '../pages/CheckoutSuccess'
+import AdminLogin from '../pages/Admin/AdminLogin';
+import AdminDashboard from '../pages/Admin/AdminDashboard';
 
 function Routers() {
   return <Routes>
@@ -31,6 +33,8 @@ function Routers() {
       <ProtectedRoute allowedRoles={['doctor']}>
         <Dashboard />
       </ProtectedRoute>} />
+      <Route path='/admin/adminLogin' element={<AdminLogin />} />
+      <Route path='/admin' element={<AdminDashboard />} />
   </Routes>
 }
 
