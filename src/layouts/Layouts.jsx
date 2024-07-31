@@ -11,11 +11,12 @@ function Layouts() {
   const path = useLocation();
   let dPath = path.pathname.split('/')[1]
   let dSubPath=path.pathname.split('/')[2]
+  console.log(dSubPath)
   return (
     <>
       {
         dPath === 'admin' ? (
-          dSubPath==='adminLogin'?(
+          dSubPath===undefined?(
             <>
             <AdminLogin />
             </>

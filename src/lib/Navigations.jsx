@@ -10,7 +10,7 @@ export const DASHBOARD_SIDEBAR_LINKS=[
     {
         key:'dashboard',
         label:'Dashboard',
-        path:'/admin',
+        path:'/admin/dashboard',
         icon:<HiOutlineViewGrid />
     },
     {

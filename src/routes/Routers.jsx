@@ -13,6 +13,8 @@ import ProtectedRoute from './ProtectedRoute';
 import CheckoutSuccess from '../pages/CheckoutSuccess'
 import AdminLogin from '../pages/Admin/AdminLogin';
 import AdminDashboard from '../pages/Admin/AdminDashboard';
+import PatientsDetails from '../pages/Admin/PatientsDetails';
+import DoctorsDetails from '../pages/Admin/DoctorsDetails';
 
 function Routers() {
   return <Routes>
@@ -33,8 +35,10 @@ function Routers() {
       <ProtectedRoute allowedRoles={['doctor']}>
         <Dashboard />
       </ProtectedRoute>} />
-      <Route path='/admin/adminLogin' element={<AdminLogin />} />
-      <Route path='/admin' element={<AdminDashboard />} />
+      <Route path='/admin/' element={<AdminLogin />} />
+      <Route path='/admin/dashboard' element={<AdminDashboard />} />
+      <Route path='/admin/patients' element={<PatientsDetails />} />
+      <Route path='/admin/doctors' element={<DoctorsDetails />} />
   </Routes>
 }
 
