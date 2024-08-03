@@ -16,7 +16,7 @@ function Layouts() {
     <>
       {
         dPath === 'admin' ? (
-          dSubPath===undefined?(
+          dSubPath===undefined || dSubPath === ''?(
             <>
             <AdminLogin />
             </>
