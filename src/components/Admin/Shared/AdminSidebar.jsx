@@ -18,7 +18,7 @@ function AdminSidebar() {
 
   const handleLogout = () => {
     dispatch({ type: "ADMIN_LOGOUT" });
-    localStorage.removeItem('adminToken');
+    // localStorage.setItem('adminToken',null);
     // window.location.href = '/login';
 }
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {authContext} from '../../context/AuthContex'
 import { toast } from 'react-toastify'
@@ -45,7 +45,7 @@ function AdminLogin() {
         }
       })
 
-      console.log(result, "admin login data")
+      // console.log(result, "admin login data")
 
       setLoading(false)
       toast.success(result.message)
@@ -56,6 +56,19 @@ function AdminLogin() {
       setLoading(false)
     }
   }
+
+  const adminToken=localStorage.getItem('adminToken');
+  let parsedAdminToken 
+  if(adminToken==null || adminToken=='null'){
+    parsedAdminToken = JSON.parse(adminToken)
+  }else{
+    parsedAdminToken = adminToken
+  }
+  useEffect(()=>{
+    if(parsedAdminToken!=null){
+      navigate('/admin/dashboard')
+    }
+  },[adminToken])
 
   return (
     <div>
