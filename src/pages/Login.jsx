@@ -54,7 +54,7 @@ function Login() {
       navigate('/home')
     } catch (error) {
       console.log(error)
-      toast.success(error.message)
+      toast.error(error.message)
       setLoading(false)
     }
   }

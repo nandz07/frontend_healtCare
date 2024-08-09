@@ -52,7 +52,7 @@ function AdminLogin() {
       navigate('/admin/dashboard')
     } catch (error) {
       console.log(error)
-      toast.success(error.message)
+      toast.error(error.message)
       setLoading(false)
     }
   }
