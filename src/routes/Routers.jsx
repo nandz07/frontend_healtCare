@@ -16,6 +16,7 @@ import AdminDashboard from '../pages/Admin/AdminDashboard';
 import PatientsDetails from '../pages/Admin/PatientsDetails';
 import DoctorsDetails from '../pages/Admin/DoctorsDetails';
 import AdminRouteProtection from './AdminRouteProtection';
+import NotFound from '../pages/NotFound';
 
 function Routers() {
   return <Routes>
@@ -36,19 +37,7 @@ function Routers() {
       <ProtectedRoute allowedRoles={['doctor']}>
         <Dashboard />
       </ProtectedRoute>} />
-    <Route path='/admin' element={<AdminLogin />} />
-    <Route path='/admin/dashboard' element={
-      <AdminRouteProtection>
-        <AdminDashboard />
-      </AdminRouteProtection>} />
-    <Route path='/admin/patients' element={
-      <AdminRouteProtection>
-        <PatientsDetails />
-      </AdminRouteProtection>} />
-    <Route path='/admin/doctors' element={
-      <AdminRouteProtection>
-        <DoctorsDetails />
-      </AdminRouteProtection>} />
+    <Route path="*" element={<NotFound />} />
   </Routes>
 }
 
