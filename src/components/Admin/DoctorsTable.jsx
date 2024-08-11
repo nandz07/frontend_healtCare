@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function DoctorsTable({ doctors}) {
+function DoctorsTable({ doctors, handleApprove }) {
 
 
   let count = 1;
@@ -39,17 +39,28 @@ function DoctorsTable({ doctors}) {
                 />
               </td>
               <td>
-                {doctor.qualifications
-                  .slice(-2)
-                  .map(qualification => qualification.degree)
-                  .join(', ')}
+                {doctor.qualifications && doctor.qualifications.length > 0
+                  ? doctor.qualifications
+                    .slice(-2)
+                    .map(qualification => qualification.degree)
+                    .join(', ')
+                  : <span className='text-red-500 font-bold'>pending</span>}
               </td>
               <td>
-                {doctor.experiences[doctor.experiences.length - 1].hospital}
+                {doctor.experiences && doctor.experiences.length > 0
+                  ? doctor.experiences[doctor.experiences.length - 1].hospital
+                  : <span className='text-red-500 font-bold'>pending</span>}
               </td>
-              <td>{doctor.specialization}</td>
-              <td>{doctor.ticketPrice}</td>
-              <td>{doctor.isApproved ? 'Yes' : 'No'}</td>
+              <td>{doctor.specialization ?? <span className='text-red-500 font-bold'>pending</span>}</td>
+              <td>{doctor.ticketPrice ?? <span className='text-red-500 font-bold'>pending</span>}</td>
+              <td>{doctor.isApproved == 'approved'
+                ? <button className='block rounded-lg py-2 bg-green-500 px-3 transition 
+                    hover:text-white text-white hover:no-underline text-center'
+                    onClick={() => handleApprove(doctor._id)}>Active</button>
+                : <button className='block rounded-lg py-2 px-3 transition bg-red-500 
+                         hover:text-white text-white hover:no-underline text-center '
+                  onClick={() => handleApprove(doctor._id)}>pending</button>
+              }</td>
               {/* <td><Link className='text-primaryColor'>click</Link></td> */}
             </tr>
           ))}

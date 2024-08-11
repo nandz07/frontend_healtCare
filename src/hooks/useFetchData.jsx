@@ -1,39 +1,43 @@
-import React, { useEffect, useState } from 'react'
-// import { token } from '../config'
+import React, { useEffect, useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 
-function useFetchData(url,admin=false) {
+function useFetchData(url, admin = false) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
+
+    const fetchData = useCallback(async () => {
+        let token = localStorage.getItem('token');
+        if (admin) token = localStorage.getItem('adminToken');
+
+        setLoading(true);
+        try {
+            const res = await fetch(url, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            const result = await res.json();
+
+            if (!res.ok) {
+                throw new Error(result.message + ' 😔');
+            }
+            setData(result.data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }, [url, admin]);
 
     useEffect(() => {
-        let token = localStorage.getItem('token');
-        if(admin) token=localStorage.getItem('adminToken');
-        const fetchData = async () => {
-            setLoading(true)
-            try {
-                const res = await fetch(url, {
-                    headers: { Authorization: `Bearer ${token}` }
-                })
-                const result = await res.json()
+        fetchData();
+    }, [fetchData]);
 
-                if (!res.ok) {
-                    // return toast.error(result.message)
-                    throw new Error(result.message +'😔')
-                }
-                setData(result.data);
-                setLoading(false);
-            } catch (err) {
-                setLoading(false);
-                setError(err.message)
-            }
-        }
-        fetchData()
-    }, [url])
     return {
-        data,loading,error
-    }
+        data,
+        loading,
+        error,
+        refetchData: fetchData, // Add this line to return the refetch function
+    };
 }
 
-export default useFetchData
+export default useFetchData;
