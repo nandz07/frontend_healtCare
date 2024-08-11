@@ -11,11 +11,6 @@ import MyAccount from '../Dashboard/user-account/MyAccount';
 import Dashboard from '../Dashboard/doctor-account/Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import CheckoutSuccess from '../pages/CheckoutSuccess'
-import AdminLogin from '../pages/Admin/AdminLogin';
-import AdminDashboard from '../pages/Admin/AdminDashboard';
-import PatientsDetails from '../pages/Admin/PatientsDetails';
-import DoctorsDetails from '../pages/Admin/DoctorsDetails';
-import AdminRouteProtection from './AdminRouteProtection';
 import NotFound from '../pages/NotFound';
 
 function Routers() {

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 // import { token } from '../config'
 import { toast } from 'react-toastify';
 
-function useFetchData(url) {
+function useFetchData(url,admin=false) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null)
 
     useEffect(() => {
         let token = localStorage.getItem('token');
+        if(admin) token=localStorage.getItem('adminToken');
         const fetchData = async () => {
             setLoading(true)
             try {
