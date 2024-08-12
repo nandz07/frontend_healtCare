@@ -5,8 +5,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import patientAvatar from '../../assets/images/patient-avatar.png'
 import { HiStar } from 'react-icons/hi'
+import useFetchData from '../../hooks/useFetchData';
+import { BASE_URL } from '../../config';
+import Loader from '../../components/Loader/Loading'
+import Error from '../../components/Error/Error'
 
 function Testimonial() {
+    const { data: reviews, loading, error } = useFetchData(`${BASE_URL}/reviews`)
+    console.log(reviews)
     return (
         <div>
 
@@ -27,126 +33,35 @@ function Testimonial() {
 
                 }}
             >
-                <SwiperSlide>
-                    <div className='py-[30px] px-5 rounded-3'>
-                        <div className="flex item-center gap-[13px]">
-                            <img src={patientAvatar} alt="" />
-                            <div >
-                                <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                    Kiran kumar
-                                </h4>
-                                <div className="flex items-center gap-[2px]">
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
 
+                <>
+                    {loading && <Loader />}
+                    {error && <Error />}
+                    {!loading && !error && (<>
+                        {reviews.map((review) => (
+                            <SwiperSlide>
+                                <div className='py-[30px] px-5 rounded-3'>
+                                    <div className="flex item-center gap-[13px]">
+                                        <img src={review.user.photo} alt="" className="h-12 w-12 bg-white rounded-full bpatient" />
+                                        <div >
+                                            <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
+                                                {review.user.name}
+                                            </h4>
+                                            <div className="flex items-center gap-[2px]">
+                                                {Array(review.rating).fill().map((_, index) => (
+                                                    <HiStar key={index} className='text-yellowColor w-[18px] h-5' />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className='text-[16px] leading-7 mt-4 w-[300px] text-textColor font-[400]'>
+                                        {`" ${review.reviewText} "`}
+                                    </p>
                                 </div>
-                            </div>
-                        </div>
-                        <p className='text-[16px] leading-7 mt-4 w-[300px] text-textColor font-[400]'>
-                            "I have taken medical services form them. They treat so well and they are providing
-                            the best medical services."
-                        </p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='py-[30px] px-5 rounded-3'>
-                        <div className="flex item-center gap-[13px]">
-                            <img src={patientAvatar} alt="" />
-                            <div >
-                                <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                    Kiran kumar
-                                </h4>
-                                <div className="flex items-center gap-[2px]">
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-
-                                </div>
-                            </div>
-                        </div>
-                        <p className='text-[16px] leading-7 mt-4 w-[300px] text-textColor font-[400]'>
-                            "I have taken medical services form them. They treat so well and they are providing
-                            the best medical services."
-                        </p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='py-[30px] px-5 rounded-3'>
-                        <div className="flex item-center gap-[13px]">
-                            <img src={patientAvatar} alt="" />
-                            <div >
-                                <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                    Kiran kumar
-                                </h4>
-                                <div className="flex items-center gap-[2px]">
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-
-                                </div>
-                            </div>
-                        </div>
-                        <p className='text-[16px] leading-7 mt-4 w-[300px] text-textColor font-[400]'>
-                            "I have taken medical services form them. They treat so well and they are providing
-                            the best medical services."
-                        </p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='py-[30px] px-5 rounded-3'>
-                        <div className="flex item-center gap-[13px]">
-                            <img src={patientAvatar} alt="" />
-                            <div >
-                                <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                    Kiran kumar
-                                </h4>
-                                <div className="flex items-center gap-[2px]">
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-
-                                </div>
-                            </div>
-                        </div>
-                        <p className='text-[16px] leading-7 mt-4 w-[300px] text-textColor font-[400]'>
-                            "I have taken medical services form them. They treat so well and they are providing
-                            the best medical services."
-                        </p>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='py-[30px] px-5 rounded-3'>
-                        <div className="flex item-center gap-[13px]">
-                            <img src={patientAvatar} alt="" />
-                            <div >
-                                <h4 className='text-[18px] leading-[30px] font-semibold text-headingColor'>
-                                    Kiran kumar
-                                </h4>
-                                <div className="flex items-center gap-[2px]">
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-                                    <HiStar className='text-yellowColor w-[18px] h-5' />
-
-                                </div>
-                            </div>
-                        </div>
-                        <p className='text-[16px] leading-7 mt-4 w-[300px] text-textColor font-[400]'>
-                            "I have taken medical services form them. They treat so well and they are providing
-                            the best medical services."
-                        </p>
-                    </div>
-                </SwiperSlide>
+                            </SwiperSlide>
+                        ))}
+                    </>)}
+                </>
             </Swiper>
         </div>
     )
