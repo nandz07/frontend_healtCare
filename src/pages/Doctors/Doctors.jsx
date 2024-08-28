@@ -61,7 +61,7 @@ function Doctors() {
         <div className="xl:w-[470px] mx-auto">
           <h2 className='heading text-center'>What our patient says</h2>
           <p className="text__para text-center">
-            World calss care for everyone. Our health system offers unmatched,
+            World class care for everyone. Our health system offers unmatched,
             expert health care.
           </p>
         </div>
