@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import convertTime from '../../utils/convertTime'
 import { BASE_URL, token } from './../../config'
 import { toast } from 'react-toastify'
+import formateDate from '../../utils/formateDate'
 
 function Sidepanel({ doctorId, ticketPrice, timeSlots }) {
-
+    const [isRadioSelected,setIsRadioSelected]=useState(false);
+    useEffect(()=>{
+        timeSlots?.length?setIsRadioSelected(true):setIsRadioSelected(false)
+    },[timeSlots])
     const bookingHandler = async () => {
 
         try {
@@ -44,10 +48,11 @@ function Sidepanel({ doctorId, ticketPrice, timeSlots }) {
                 <ul className="mt-3">
                     {timeSlots?.map((item, index) => (
                         <li key={index} className="flex items-center justify-between mb-2">
-                            <p className="text-[15px] leading-6 text-textColor font-semibold">
-                                {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
+                            <p className="text-[13px] leading-6 text-textColor font-semibold">
+                                <input type="radio" name="timeSlote" id={`${item.day}${item.startingTime}`} className='mr-1' checked/>
+                                {item.day.charAt(0).toUpperCase() + item.day.slice(1)+'-' +formateDate(item.dateOfNextDay)} 
                             </p>
-                            <p className='text-[15px] leading-6 text-textColor font-semibold'>
+                            <p className='text-[13px] leading-6 text-textColor font-semibold'>
                                 {/* {item.startingTime} - {item.endingTime} */}
                                 {convertTime(item.startingTime)} - {convertTime(item.endingTime)}
 
@@ -58,7 +63,8 @@ function Sidepanel({ doctorId, ticketPrice, timeSlots }) {
                 </ul>
             </div>
 
-            <button onClick={bookingHandler} className='btn px-2 w-full rounded-md'>Book Appointment</button>
+            <button onClick={bookingHandler} className='btn px-2 w-full rounded-md'
+            disabled={!isRadioSelected}>Book Appointment</button>
         </div>
     )
 }
