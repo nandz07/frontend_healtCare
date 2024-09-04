@@ -8,10 +8,12 @@ import { AuthContextProvider } from './context/AuthContex.jsx'
 import Layouts from './layouts/Layouts.jsx'
 import AdminLayouts from './layouts/AdminLayouts.jsx'
 import AdminLogin from './pages/Admin/AdminLogin.jsx'
+import ScrollToTop from './routes/ScrollToTop.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
+    <ScrollToTop />
       <AuthContextProvider>
         <ToastContainer theme='dark' className='mt-20' position='top-right' autoClose={3000} closeOnClick pauseOnHover={false} />
         <Routes>
